@@ -1,0 +1,13 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.link {
+  color: inherit;
+}
+
+.link.active {
+  color: var(--color-primary);
+}
