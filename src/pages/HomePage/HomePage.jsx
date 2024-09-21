@@ -1,32 +1,18 @@
-import { useEffect, useState } from "react";
-import { getTrendingMovie } from "../../api";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loader from "../../components/Loader/Loader";
 import MovieList from "../../components/MovieList/MovieList";
+import useTrendingMovie from "../../hooks/useTrendingMovie";
+
+import css from "./HomePage.module.css";
 
 const HomePage = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    getTrendingMovie()
-      .then((data) => {
-        const { results } = data;
-        setMovies(results);
-      })
-      .catch((error) => {
-        setError(error.message || "Oops, try again later...");
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const { loading, data, error } = useTrendingMovie();
 
   return (
     <div>
-      <h1>Trending today</h1>
-      {loading && <Loader />}
-      <MovieList list={movies} />
+      <h1 className={css.title}>Trending today</h1>
       {error && <ErrorMessage>{error}</ErrorMessage>}
+      {loading ? <Loader /> : <MovieList list={data} />}
     </div>
   );
 };

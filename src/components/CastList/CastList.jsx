@@ -1,13 +1,12 @@
 import css from "./CastList.module.css";
 
 const sortCast = (a, b) => {
-  if (!a.profile_path) {
-    return 1;
-  }
-  if (!b.profile_path) {
+  if (a.order < b.order) {
     return -1;
   }
-
+  if (a.order > b.order) {
+    return 1;
+  }
   return 0;
 };
 

@@ -15,7 +15,7 @@ const axiosInstance = axios.create({
 //   Authorization: `Bearer ${VITE_TMDB_API_READ_ACCESS_TOKEN}`,
 // };
 
-export const getTrendingMovie = async (timeWindow = "day") => {
+export const getTrendingMovie = async (timeWindow) => {
   const response = await axiosInstance.get(`/trending/movie/${timeWindow}`);
   return response.data;
 };
